@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // if
+      //   var a = 20
+
+      //   if (a > 10) {
+      //     document.write('el numero es mayor que 10')
+      //   } else {
+      //     document.write('el numero es 10 o menos')
+      //   }
+
+      // a > 10 ? document.write('el numero es mayor que 10') : document.write('es menor que 10')
+
+      var isMayorQueDiez = a > 10 ? true : false
+      var key = 'hola'
+
+      switch (key) {
+        case 'hola':
+          document.write('es hola')
+          break
+        case 'adios':
+          document.write('es adios')
+          break
+        default:
+          document.write('no es ni hola ni adiós')
+      }
+
+      for (var index = 0; index < 5; index++) {
+        console.log(index)
+      }
+
+      for (var index = 1; index<=10; index++) {
+        // los impares no me interesan
+        if (index % 2  === 1) {
+            continue // salta al siguiente ciclo
+        }
+
+        // quiero llegar sólo hasta el 8
+        if (index > 8) {
+            break // sale del bucle
+        }
+        console.log(index)
+    }
+    </script>
+  </body>
+</html>
