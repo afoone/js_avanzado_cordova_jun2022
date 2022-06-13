@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = [1, 2, 3, 4, 5]
+
+      for (let index = 0; index < arr.length; index++) {
+        const element = arr[index]
+        console.log(element)
+      }
+
+      // Foreach
+      arr.forEach(v => console.log(v))
+
+      arr.forEach((v, index) => console.log(index, v))
+
+      // Map
+      // Genera un nuevo array
+      // a cada elemento le pasa una función de transformación
+
+      arr.map(
+        // función de tranformación
+        v => v * 2
+      )
+      // genera un nuevo array, con la misma dimensión,
+      // en el que cada valor está multiplicado por dos
+
+      // el array original no se ve modificado
+
+      // Filter
+      // genera un nuevo array filtrando los resultados
+      // le paso una función que tiene que devolver
+      // 'truthy' en el caso de que queramos que ese elemento
+      // pertenezca al nuevo array
+
+      // Filtro para los pares
+      arr.filter(v => v % 2 === 0)
+
+      // Concatenar estas funciones
+      arr.filter(v => v % 2 === 0).map(v => v * 2)
+
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var escribeResultado = (a, b, operacion) => {
+        console.log('resultado es' + operacion(a, b))
+      }
+
+      escribeResultado(2, 6, (a, b) => a + b)
+
+      // cuando tenemos una función que recibe una función como
+      // parámetro o es una función que devuelve una función
+      // (o ambas cosas) , se dice que tenemos una
+      // función de orden superior
+
+      var multiplicador = multiplicador => {
+        return p => p * multiplicador
+      }
+
+      var mult3 = multiplicador(3)
+
+      console.log(mult3(8))
+    </script>
+  </body>
+</html>
