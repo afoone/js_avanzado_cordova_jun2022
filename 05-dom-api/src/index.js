@@ -1,0 +1,1 @@
+document.getElementById('main').innerHTML ="Mi gran aplicación"

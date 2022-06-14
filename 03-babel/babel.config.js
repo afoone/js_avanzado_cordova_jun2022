@@ -15,8 +15,5 @@ const presets = [
         }
       ]
     ]
-
-    const plugins =   ["@babel/plugin-transform-modules-commonjs"]
-
   
-   export default {presets, plugins}
+   export default {presets}
