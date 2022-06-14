@@ -45,6 +45,31 @@
       // Concatenar estas funciones
       arr.filter(v => v % 2 === 0).map(v => v * 2)
 
+      // reducción: suma de todos los componentes
+      arr.reduce(
+        (acc, curr) => acc + curr, 
+        0
+      )
+
+      // reducción: devuelvo un array que en la posición 0 es la suma de todos los impares
+      // y en la 1, la suma de los pares
+      arr.reduce(
+        (acc, curr) => curr % 2 === 1? [acc[0]+curr, acc[1]]: [acc[0], acc[1]+ curr]  ,
+        [0, 0]
+      )
+
+      // Obtener el máximo
+      arr.reduce(
+        (acc, curr) => {
+          if (acc) {
+            return acc < curr ? curr : acc 
+          } else {
+            return curr
+          }
+        },
+        null
+      )
+
       
     </script>
   </body>
