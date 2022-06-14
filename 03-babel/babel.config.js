@@ -3,7 +3,7 @@ const presets = [
         "@babel/preset-env",
         {
           "targets": {
-
+            "node": true,
             "chrome": "58",
             "browsers": [
                 "> 1%",
@@ -15,5 +15,8 @@ const presets = [
         }
       ]
     ]
+
+    const plugins =   ["@babel/plugin-transform-modules-commonjs"]
+
   
-    module.exports = {presets}
+   export default {presets, plugins}

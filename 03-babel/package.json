@@ -2,6 +2,7 @@
   "name": "babel",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir dist"
   },
@@ -11,8 +12,12 @@
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.2",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.18.2",
     "babel-loader": "^8.2.5"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }
