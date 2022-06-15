@@ -1,0 +1,11 @@
+.lista-container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.drop-zone {
+    width: 80%;
+    border: 1px solid blue;
+    padding: 2rem;
+    border-radius: 1rem;
+}
