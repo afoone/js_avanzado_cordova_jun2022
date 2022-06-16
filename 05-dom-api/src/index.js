@@ -42,16 +42,33 @@ const creaListaUsuarios = usuarios => {
   usuarios.forEach(usuario => {
     const li = document.createElement('li')
     li.textContent = usuario.name
+    li.id = `empleado-${usuario.id}`
     li.draggable = true
+    li.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text', e.target.id)
+    })
     lista.appendChild(li)
   })
   return //Array de HTMLElement
 }
 
+const removeUser = idUsuario => {
+  const listaUsuarios = document.getElementById('lista-usuarios')
+  listaUsuarios.removeChild(document.getElementById(idUsuario))
+  const er = new RegExp(/\w+-/)
+  const id = idUsuario.replace(er, '')
+  id &&
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+      method: 'DELETE',
+    }).catch(
+      console.error
+    )
+}
+
 const initializeDaD = () => {
   const dropZone = document.querySelector('.drop-zone')
-  dropZone.addEventListener('drop', content => {
-    console.log(content)
+  dropZone.addEventListener('drop', e => {
+    removeUser(e.dataTransfer.getData('text'))
   })
   dropZone.addEventListener('dragover', e => {
     e.preventDefault()
@@ -75,6 +92,8 @@ const main = () => {
   const botonera = document.querySelector('#botonera')
   botonera.appendChild(boton)
   botonera.appendChild(botonLocalizar)
+
+  recuperaUsuarios()
 }
 
 main()
