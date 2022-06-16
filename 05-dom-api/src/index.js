@@ -20,9 +20,76 @@ const isVerano = isHemisferioNorte => {
   )
 }
 
+const initializeIndexedDB = () => {
+
+  let db 
+  const idbRequest = indexedDB.open('next', 3)
+  idbRequest.onupgradeneeded = 
+   (e) => { // Se dispara si no existía la base de datos
+    console.log('inicializacion de base de datos')
+    
+    if (e.oldVersion === 0) {
+      console.log('la base de datos no existía')
+      // inicializar la db.
+    }
+
+    if (e.oldVersion  === 2){
+      // igual me toca actualizar algo.
+      console.log('actualizar')
+      const db = idbRequest.result
+      db.createObjectStore(
+        'usuarios',
+        {
+          keyPath: 'id'
+        }
+      )
+    }
+
+    
+  
+  }
+  
+
+  idbRequest.onerror = console.error
+
+  idbRequest.onsuccess = () => {
+     db = idbRequest.result
+    // empezar a trabajar
+    
+    const usuarioTransaction  = db.transaction('usuarios', 'readwrite')
+    usuarioTransaction.oncomplete  = () => console.log('transaccion terminada')
+    const usuariosStore = usuarioTransaction.objectStore('usuarios')
+    const rGet = usuariosStore.get(1212)
+    // usuariosStore.createIndex("no")
+    rGet.onsuccess = e => console.log(e.target.result)
+    const request = usuariosStore.add(
+      {
+        id: 1212,
+      }
+    )
+    request.onsuccess = (e) => {console.log('usuario añadido', e)}
+    request.onerror = console.error
+  }
+
+
+
+  //
+
+
+
+
+}
+
 const recuperaUsuarios = async () => {
   const lista = document.querySelector('#lista-usuarios')
   const loadingEl = document.createElement('h2')
+
+  const cache = localStorage.getItem('usuarios')
+  if (cache) {
+    creaListaUsuarios(JSON.parse(cache))
+    return
+  }
+
   loadingEl.textContent = 'Cargando...'
   lista.appendChild(loadingEl)
   const res = await fetch('https://jsonplaceholder.typicode.com/users')
@@ -30,6 +97,7 @@ const recuperaUsuarios = async () => {
 
   if (res.ok) {
     const usuarios = await res.json()
+    localStorage.setItem('usuarios', JSON.stringify(usuarios))
     console.log({ usuarios })
     lista.removeChild(loadingEl)
     creaListaUsuarios(usuarios)
@@ -52,6 +120,15 @@ const creaListaUsuarios = usuarios => {
   return //Array de HTMLElement
 }
 
+const handleError = err => {
+  console.error(err)
+  window.alert(err)
+}
+
+const notifyDelete = () => {
+  window.alert('elemento borrado correctamente')
+}
+
 const removeUser = idUsuario => {
   const listaUsuarios = document.getElementById('lista-usuarios')
   listaUsuarios.removeChild(document.getElementById(idUsuario))
@@ -60,9 +137,9 @@ const removeUser = idUsuario => {
   id &&
     fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
       method: 'DELETE',
-    }).catch(
-      console.error
-    )
+    })
+      .then(notifyDelete)
+      .catch(handleError)
 }
 
 const initializeDaD = () => {

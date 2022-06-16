@@ -1,0 +1,14 @@
+{
+    "name": "经济学",
+    "short_name": "经济学",
+    "lang": "zh-CN",
+    "start_url": "index.html",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
